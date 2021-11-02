@@ -2,17 +2,22 @@ package com.company;
 
 public class BankAccount {
 
+    public BankAccount(int accountNumber,String accountHolder,String branchName,String branchAddress, double balance){
+
+        setBalance(balance);
+    }
+
     String accountHolder;
     String accountType;
     String branchName;
     String branchAddress;
     double balance;
 
-    public int getAccountNumber() {
+    private int getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    private void setAccountNumber(int accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -20,41 +25,45 @@ public class BankAccount {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    private void setBalance(double balance) {
+
+        if (balance<0){
+            throw new IllegalArgumentException("Starting balance cannot be less than 0.");
+        }
         this.balance = balance;
     }
 
     int accountNumber;
 
-    public String getAccountHolder() {
+    private String getAccountHolder() {
         return accountHolder;
     }
 
-    public void setAccountHolder(String accountHolder) {
+    private void setAccountHolder(String accountHolder) {
         this.accountHolder = accountHolder;
     }
 
-    public String getAccountType() {
+    private String getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
+    private void setAccountType(String accountType) {
         this.accountType = accountType;
     }
 
-    public String getBranchName() {
+    private String getBranchName() {
         return branchName;
     }
 
-    public void setBranchName(String branchName) {
+    private void setBranchName(String branchName) {
         this.branchName = branchName;
     }
 
-    public String getBranchAddress() {
+    private String getBranchAddress() {
         return branchAddress;
     }
 
-    public void setBranchAddress(String branchAddress) {
+    private void setBranchAddress(String branchAddress) {
         this.branchAddress = branchAddress;
     }
 
@@ -68,11 +77,13 @@ public class BankAccount {
 
     }
 
-    public void withdrawAmount(double amount){
-        balance=balance-amount;
-
-        System.out.println("The total amount withdrawn is $"+amount);
-        System.out.println("The updated balance is $"+balance);
+    public void withdrawAmount(double amount) {
+        balance = balance - amount;
+        if (balance > 0) {
+            System.out.println("The total amount withdrawn is $" + amount);
+            System.out.println("The updated balance is $" + balance);
+        } else
+            System.out.println("You have insufficient balance. Kindly enter a lower amount for withdrawal.");
     }
 
     public String checkBalance(){
